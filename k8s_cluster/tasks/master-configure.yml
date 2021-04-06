@@ -1,0 +1,24 @@
+- name: Initialize Master 
+  shell: kubeadm init --pod-network-cidr=10.244.0.0/16 --ignore-preflight-errors=NumCPU --ignore-preflight-errors=Mem 
+  ignore_errors: yes
+  register: init 
+
+- name: configure Master as a client - phase1
+  shell: mkdir -p $HOME/.kube 
+- name: configure Master as a client - phase2 
+  shell: sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config 
+- name: configure Master as a client - phase3
+  shell: sudo chown $(id -u):$(id -g) $HOME/.kube/config 
+
+- name: Running Flannel 
+  shell: kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+
+- name: generating token 
+  shell: kubeadm token create --print-join-command 
+  register: master_token 
+  ignore_errors: yes 
+ 
+- name: You can copy the token to JOIN master 
+  debug: 
+    var: master_token.stdout
+  register: token 

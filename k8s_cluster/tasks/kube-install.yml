@@ -1,0 +1,13 @@
+- name: configure yum repo for kubernetes 
+  copy: 
+    src: kubernetes.repo 
+    dest: /etc/yum.repos.d/kubernetes.repo 
+
+- name: install kubeadm kubelet and kubectl 
+  command: yum install kubeadm kubelet kubectl -y 
+
+- name: start and enable kubelet service 
+  service: 
+    name: kubelet 
+    state: started 
+    enabled: yes 

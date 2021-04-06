@@ -1,0 +1,28 @@
+- name: pull k8s configuration images 
+  shell: kubeadm config images pull 
+  changed_when: false 
+  ignore_errors: yes
+
+- name: configure docker cgroup 
+  copy: 
+    src: daemon.json 
+    dest: /etc/docker/daemon.json 
+  
+- name: "Restart docker service" 
+  service: 
+    name: docker
+    state: restarted 
+    
+- name: install iproute-tc for traffic control 
+  package: 
+    name: iproute-tc 
+    state: present 
+
+- name: configure iptables 
+  copy: 
+    src: k8s.conf 
+    dest: /etc/sysctl.d/k8s.conf 
+
+- name: restart service
+  shell: sudo sysctl --system 
+  

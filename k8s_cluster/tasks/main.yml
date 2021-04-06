@@ -1,0 +1,28 @@
+---
+# tasks file for k8s_master
+
+- name: "Install docker"
+  import_tasks: "docker-install.yml"
+
+- name: "Install kubernetes"
+  import_tasks: "kube-install.yml"
+
+- name: "Configure kubernetes"
+  import_tasks: "kube-configure.yml"
+
+- name: "Configure Master node"
+  import_tasks: "master-configure.yml"
+  when: inventory_hostname in groups['tag_Name_k8s_Master']
+
+- name: "Configure Slave nodes"
+  import_tasks: "slave-configure.yml"
+  when: inventory_hostname in groups['tag_Name_k8s_Master']
+
+- name: "Configure Slave nodes"
+  import_tasks: "slave-configure.yml"
+  when: inventory_hostname in groups['tag_Name_k8s_Slave']
+
+
+
+
+
