@@ -1,0 +1,18 @@
+---
+- name: launch ec2 instances for k8s cluster 
+  ec2: 
+    key_name: "{{  key_name }}" 
+    instance_type: "{{ instance_type }}" 
+    image: "{{image_id}}"
+    wait: yes 
+    count: 1
+    vpc_subnet_id: "{{subnet_id}}"
+    state: present 
+    region: "{{ aws_region }}" 
+    assign_public_ip: yes 
+    aws_access_key: "{{ accessKey }}"
+    aws_secret_key: "{{ secretKey }}"
+    wait_timeout: 600 
+    instance_tags:
+      Name: "{{ item }}"
+  loop: "{{ node_name }}"

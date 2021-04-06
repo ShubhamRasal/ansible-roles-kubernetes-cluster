@@ -1,0 +1,13 @@
+---
+accessKey: ""     # Your Access key
+secretKey: ""  # Access Key
+# node_name:                         # instance tag
+# - "k8s_Master"
+# - "k8s_Slave"
+# - "k8s_Slave"
+    
+# key_name: "arth-key"
+instance_type: "t2.micro"
+image_id: ami-0eeb03e72075b9bcc
+subnet_id: "subnet-35f6cc5d"
+aws_region: "ap-south-1"
