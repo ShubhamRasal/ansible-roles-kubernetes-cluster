@@ -336,7 +336,7 @@ We will import all the separate tasks file into main playbook.
 
 - name: "Configure Slave nodes"
   import_tasks: "slave-configure.yml"
-  when: inventory_hostname in groups['tag_Name_k8s_Master']
+  when: inventory_hostname in groups['tag_Name_k8s_Slave']
 ```
 
 Create one k8s_setup.yml file from which we will call our k8s cluster role.
