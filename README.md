@@ -110,13 +110,13 @@ Run the playbook
 
 ![eb299e8c22f8aa0c408c27bb3afe0e47.png](./_resources/398755a1d10c4408bbc2fb7bccc41624.png)
 
-![4b26f75191c2805d5ac7870b8c8a18d7.png](../_resources/ab1dfdffe2204d46b3f4e5e54281cc72.png)
+![4b26f75191c2805d5ac7870b8c8a18d7.png](./_resources/ab1dfdffe2204d46b3f4e5e54281cc72.png)
 
 Now we have launched 3 aws instances, also have dynamic inventory. We can test that we can access the these instances using ansible ping module.
 
 `$ ansible all -m ping`
 
-![0df15ef72d8aad48d5ba46f53c9d7391.png](../_resources/cc945cea529b4389b658c73b9b897380.png)
+![0df15ef72d8aad48d5ba46f53c9d7391.png](./_resources/cc945cea529b4389b658c73b9b897380.png)
 
 All set to configure nodes as k8s master and slaves.. Let's start then;
 
@@ -364,12 +364,12 @@ Run the playbook, This playbook will configure master and slave nodes on aws clo
 
 `$ ansible-playbook k8s_setup.yml `
 
-![5db0d8333ddd57785153a6ac5120413a.png](../_resources/4c090847c6df4f36977e2be58350cad9.png)
+![5db0d8333ddd57785153a6ac5120413a.png](./_resources/4c090847c6df4f36977e2be58350cad9.png)
 
-![2fa84787ae0783677103c72a3966c75c.png](../_resources/0e87420a27614e9abbea9cec5c51f5b4.png)
+![2fa84787ae0783677103c72a3966c75c.png](./_resources/0e87420a27614e9abbea9cec5c51f5b4.png)
 
-![4c369ca97df0870eaeb4c6b7f9e259c4.png](../_resources/e866af0bee3c4062bd2d1cfdb91238ef.png)
+![4c369ca97df0870eaeb4c6b7f9e259c4.png](./_resources/e866af0bee3c4062bd2d1cfdb91238ef.png)
 
 Finally, you can check at the end that kubernetes cluster has been configured successfully.
 
-![7c38f935c8429bde2c6900c7f19082f7.png](../_resources/9446bb8e6ea541a9b8657a900121e92e.png)
+![7c38f935c8429bde2c6900c7f19082f7.png](./_resources/9446bb8e6ea541a9b8657a900121e92e.png)
