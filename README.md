@@ -270,6 +270,8 @@ Add below tasks to configure kubenetes.
 
 ## Configure Kubernetes master
 
+Write below tasks into k8s_cluster/tasks/master-configure.yml
+
 ```yml
 - name: pull k8s configuration images 
   shell: kubeadm config images pull 
@@ -300,6 +302,17 @@ Add below tasks to configure kubenetes.
   shell: sudo sysctl --system
 ```
 
+## Configure Kubernetes Slave
+
+Write below tasks into k8s_cluster/tasks/slave-configure.yml
+
+```yml
+- name: join slave to master node
+  shell: "{{ hostvars[item]['master_token']['stdout'] }}"
+  ignore_errors: yes 
+  with_items: "{{ groups['tag_Name_k8s_Master'] }}"
+```
+
 Import all the tasks in main.yml file
 
 We will import all the separate tasks file into main playbook.
@@ -326,8 +339,6 @@ We will import all the separate tasks file into main playbook.
   when: inventory_hostname in groups['tag_Name_k8s_Master']
 ```
 
-## Configure Kubernetes Slave
-
 Create one k8s_setup.yml file from which we will call our k8s cluster role.
 
 We have alomost same setup for master and slave but for slave we have to pass the master token to join the cluster. we will add this step in main.yml file only.
@@ -340,20 +351,6 @@ We have alomost same setup for master and slave but for slave we have to pass th
   roles: 
     - name: configure kubernetes cluster and master
       role: k8s_cluster
-- hosts:
-  - tag_Name_k8s_Slave
-  vars_prompt: 
-    - name: "master_token"
-      prompt: "Please enter token to JOIN master node : "
-      private: no
-  tasks:
-  - name: join slave to master node
-    shell: "{{ master_token }}"
-    ignore_errors: yes 
-    register: masterToken
-  
-  - debug:
-      var: masterToken
 ```
 
 and DONE!.. We have successfully  created role to configure kubernetes cluster.
