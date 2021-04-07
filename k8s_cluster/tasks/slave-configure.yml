@@ -1,11 +1,11 @@
-- name: "Slave setup"
-  pause:    
-    prompt: "Do you want to continue slave setup "
-
 - name: join slave to master node
-  shell: "{{ master_token.stdout }}"
+  shell: "{{ hostvars[item]['master_token']['stdout'] }}"
   ignore_errors: yes 
   register: slave_output 
-
+  with_items: "{{ groups['tag_Name_k8s_Master'] }}"
+  
 - debug:
     var: slave_output.stdout_lines 
+
+
+    
