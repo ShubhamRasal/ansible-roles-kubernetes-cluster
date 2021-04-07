@@ -108,7 +108,7 @@ Run the playbook
 
 `$ ansible-playbook launch-instnaces.yml`
 
-![eb299e8c22f8aa0c408c27bb3afe0e47.png](../_resources/398755a1d10c4408bbc2fb7bccc41624.png)
+![eb299e8c22f8aa0c408c27bb3afe0e47.png](./_resources/398755a1d10c4408bbc2fb7bccc41624.png)
 
 ![4b26f75191c2805d5ac7870b8c8a18d7.png](../_resources/ab1dfdffe2204d46b3f4e5e54281cc72.png)
 
