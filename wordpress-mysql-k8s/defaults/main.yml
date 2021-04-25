@@ -1,0 +1,10 @@
+---
+# defaults file for wordpress-mysql-k8s
+
+mysql_root_pass: "D3V3L0P3R@INDIA"
+
+mysql_db: "wordpress"
+
+mysql_user: "wordpress"
+
+mysql_pass: "D3V3L0P3R@INDIA"

@@ -1,0 +1,57 @@
+---
+# tasks file for wordpress-mysql-k8s
+- name: Create directory to store k8s yml files
+  file: 
+    path: "/srv/k8s_wordpress"
+    state: directory
+
+- name: copying mysql yaml file
+  template:
+      src: "mysql.yml.j2"
+      dest: "/srv/k8s_wordpress/mysql.yml"
+
+- name: copying wordpress yaml file
+  copy: 
+      src: "wordpress.yml"
+      dest: "/srv/k8s_wordpress/wordpress.yml"
+
+- name: copying service file
+  copy:
+      src: "service.yml"
+      dest: "/srv/k8s_wordpress/service.yml"
+
+
+- name: creating mysql pod
+  shell: "kubectl apply -f /srv/k8s_wordpress/mysql.yml"
+  register: mysql
+
+- name: status of mysql pod
+  debug:
+      var: mysql
+
+- name: creating wordpress pod
+  shell: "kubectl apply -f /srv/k8s_wordpress/wordpress.yml"
+  register: wp
+
+- name: status of wordpress pod
+  debug:
+      var: wp
+
+- name: allowing port on service/lb
+  shell: "kubectl apply -f /srv/k8s_wordpress/service.yml"
+  register: svc
+
+- name: exposed status of service/lb
+  debug:
+      var: svc
+
+- name: "Pausing playbook for 60 seconds"
+  pause: 
+    seconds: 60
+
+- name: "getting all pods"
+  shell: "kubectl get pods -o wide"
+  register: pods 
+
+- debug:
+    var: "pods.stdout_lines"

@@ -1,4 +1,3 @@
-# launch-instances.yml
 - hosts: localhost 
   roles:
     - name: Provision EC2 Instances 
@@ -9,4 +8,3 @@
           - "k8s_Slave"
           - "k8s_Slave"
       - key_name: "arth-key"
-      

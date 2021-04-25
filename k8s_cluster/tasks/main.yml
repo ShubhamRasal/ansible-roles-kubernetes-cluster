@@ -16,10 +16,6 @@
 
 - name: "Configure Slave nodes"
   import_tasks: "slave-configure.yml"
-  when: inventory_hostname in groups['tag_Name_k8s_Master']
-
-- name: "Configure Slave nodes"
-  import_tasks: "slave-configure.yml"
   when: inventory_hostname in groups['tag_Name_k8s_Slave']
 
 
